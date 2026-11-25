@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>67 — o número que não passa despercebido</title>
+<meta name="description" content="Uma página inteira sobre o número 67: primo, superprimo, atômico, francês e cheio de curiosidades.">
+<style>
+:root{
+  --bg:#0b0910;
+  --panel:#131020;
+  --ink:#f4efff;
+  --muted:#a79dc0;
+  --gold:#ffc857;
+  --gold-2:#ff9f45;
+  --violet:#8b5cf6;
+  --line:rgba(255,255,255,.09);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  line-height:1.6;overflow-x:hidden;
+}
+body::before{
+  content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(900px 600px at 70% -10%, rgba(139,92,246,.18), transparent 60%),
+    radial-gradient(700px 500px at 10% 20%, rgba(255,200,87,.10), transparent 60%),
+    radial-gradient(800px 600px at 50% 110%, rgba(139,92,246,.12), transparent 60%);
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.5;
+  background-image:
+    linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(circle at 50% 30%, #000 20%, transparent 75%);
+  -webkit-mask-image:radial-gradient(circle at 50% 30%, #000 20%, transparent 75%);
+}
+::selection{background:var(--gold);color:#1a1206}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;min-height:96vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+  padding:64px 20px 40px;overflow:hidden;
+}
+.hero .glow{
+  position:absolute;width:min(760px,120vw);aspect-ratio:1;border-radius:50%;
+  background:conic-gradient(from 0deg, rgba(255,200,87,.0), rgba(255,200,87,.16), rgba(139,92,246,.22), rgba(255,200,87,0));
+  filter:blur(60px);animation:spin 26s linear infinite;pointer-events:none;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.kicker{
+  position:relative;font-size:11px;font-weight:800;letter-spacing:.42em;
+  color:var(--muted);text-transform:uppercase;margin:0 0 6px;
+}
+.big{
+  position:relative;display:flex;align-items:center;justify-content:center;
+  margin:-6px 0 -10px;
+}
+.big .echo{
+  position:absolute;font-size:clamp(190px,38vw,430px);font-weight:900;
+  line-height:.82;letter-spacing:-.07em;color:transparent;
+  -webkit-text-stroke:1px rgba(255,200,87,.22);
+  transform:translate(10px,12px);user-select:none;
+}
+.big .num{
+  position:relative;font-size:clamp(180px,36vw,420px);font-weight:900;
+  line-height:.82;letter-spacing:-.07em;
+  background:linear-gradient(180deg,#fff4d2 0%,#ffc857 46%,#d68d2a 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 22px 60px rgba(255,160,60,.22));
+  animation:float 7s ease-in-out infinite;
+}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.hero h1{
+  position:relative;font-size:clamp(26px,4.2vw,52px);line-height:1.08;
+  letter-spacing:-.03em;margin:34px 0 0;font-weight:900;max-width:900px;
+}
+.hero h1 em{
+  font-style:normal;
+  background:linear-gradient(90deg,var(--gold),#ffe9b0 60%,var(--violet));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.lede{
+  position:relative;max-width:640px;margin:18px 0 0;color:var(--muted);
+  font-size:clamp(14px,1.6vw,17px);
+}
+.chips{position:relative;display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:22px}
+.chip{
+  font-size:11.5px;font-weight:700;letter-spacing:.06em;padding:6px 12px;border-radius:999px;
+  border:1px solid var(--line);background:rgba(255,255,255,.04);color:#ded3f4;
+}
+.chip b{color:var(--gold);font-weight:800}
+.scroll{
+  position:absolute;bottom:22px;left:50%;transform:translateX(-50%);
+  color:var(--muted);font-size:10px;letter-spacing:.3em;text-transform:uppercase;
+  animation:bob 2.4s ease-in-out infinite;
+}
+@keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,7px)}}
+</style>
+</head>
+<body>
+<style>
+/* ---------- layout ---------- */
+main{position:relative;max-width:1120px;margin:0 auto;padding:0 22px 80px}
+section{padding:56px 0 8px}
+.eyebrow{
+  display:flex;align-items:center;gap:12px;margin:0 0 10px;
+  font-size:11px;font-weight:800;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);
+}
+.eyebrow::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(255,200,87,.35),transparent)}
+h2{font-size:clamp(24px,3.2vw,38px);line-height:1.12;letter-spacing:-.025em;margin:0 0 10px;font-weight:900}
+.sub{color:var(--muted);margin:0 0 26px;max-width:640px;font-size:14.5px}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:-8px}
+.stat{
+  padding:18px 18px 16px;border-radius:16px;border:1px solid var(--line);
+  background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.015));
+  transition:transform .2s ease,border-color .2s ease;
+}
+.stat:hover{transform:translateY(-3px);border-color:rgba(255,200,87,.35)}
+.stat .k{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.stat .v{font-size:22px;font-weight:900;letter-spacing:-.02em;margin-top:2px}
+.stat .v span{color:var(--gold)}
+.stat .d{font-size:11.5px;color:#8d83a4;margin-top:2px}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:14px}
+.card{
+  position:relative;padding:22px 20px 20px;border-radius:18px;overflow:hidden;
+  border:1px solid var(--line);
+  background:linear-gradient(160deg,rgba(255,255,255,.055),rgba(255,255,255,.012) 55%,rgba(139,92,246,.05));
+  transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease;
+}
+.card::before{
+  content:"";position:absolute;inset:0;border-radius:18px;padding:1px;pointer-events:none;
+  background:linear-gradient(140deg,rgba(255,200,87,.35),transparent 40%,rgba(139,92,246,.3));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .22s;
+}
+.card:hover{transform:translateY(-4px);box-shadow:0 22px 50px rgba(0,0,0,.45)}
+.card:hover::before{opacity:1}
+.card .tag{font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.card h3{margin:6px 0 8px;font-size:18px;letter-spacing:-.01em}
+.card p{margin:0;color:#b6abc9;font-size:13.6px}
+.card p b{color:#fff;font-weight:700}
+.card .bigx{
+  position:absolute;right:12px;top:4px;font-size:54px;font-weight:900;
+  color:rgba(255,255,255,.05);letter-spacing:-.06em;pointer-events:none;
+}
+
+.split{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;align-items:stretch}
+@media(max-width:820px){.split{grid-template-columns:1fr}}
+
+.table67{border-radius:18px;border:1px solid var(--line);overflow:hidden;background:rgba(255,255,255,.02)}
+.table67 .thead{
+  display:flex;justify-content:space-between;padding:11px 16px;
+  font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);
+  border-bottom:1px solid var(--line);background:rgba(255,255,255,.03);
+}
+.row{
+  display:grid;grid-template-columns:52px 1fr auto;align-items:center;gap:10px;
+  padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.045);
+  transition:background .15s,color .15s;cursor:default;
+}
+.row:last-child{border-bottom:0}
+.row:hover{background:rgba(255,200,87,.09)}
+.row .i{font-size:11px;color:#7f7597;font-weight:700}
+.row .m{font-size:13px;color:#cfc5e2}
+.row .r{font-size:15px;font-weight:900;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.row:hover .r{color:var(--gold)}
+
+.calc{
+  border-radius:18px;border:1px solid var(--line);padding:22px;
+  background:radial-gradient(600px 300px at 90% 0%,rgba(139,92,246,.16),transparent 60%),rgba(255,255,255,.02);
+  display:flex;flex-direction:column;justify-content:center;
+}
+.calc label{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:800}
+.calc .line{display:flex;align-items:center;gap:8px;margin-top:10px}
+.calc .x{font-size:20px;font-weight:900;color:var(--gold)}
+.calc input{
+  width:100%;min-width:0;padding:11px 14px;border-radius:12px;border:1px solid var(--line);
+  background:rgba(0,0,0,.35);color:#fff;font-size:15px;font-weight:700;outline:none;
+  font-variant-numeric:tabular-nums;
+}
+.calc input:focus{border-color:rgba(255,200,87,.55);box-shadow:0 0 0 3px rgba(255,200,87,.12)}
+.calc .eq{margin-top:16px;font-size:clamp(28px,4vw,42px);font-weight:900;letter-spacing:-.03em;line-height:1;word-break:break-all}
+.calc .eq span{color:var(--gold)}
+.calc .note{margin:10px 0 0;font-size:12px;color:#8d83a4}
+button.celebrate{
+  margin-top:14px;align-self:flex-start;padding:10px 16px;border-radius:999px;border:0;cursor:pointer;
+  font-weight:800;font-size:12px;letter-spacing:.04em;color:#1a1206;
+  background:linear-gradient(180deg,#ffe08a,#ffc53d);
+  box-shadow:0 8px 22px rgba(255,197,61,.22);transition:transform .15s;
+}
+button.celebrate:hover{transform:translateY(-1px)}
+
+.factsline{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.fact{display:flex;gap:12px;padding:16px 0;border-top:1px solid var(--line)}
+.fact .n{font-size:12px;font-weight:900;color:var(--gold);min-width:34px;padding-top:2px}
+.fact h4{margin:0 0 3px;font-size:14.5px}
+.fact p{margin:0;font-size:12.8px;color:#a79dc0}
+footer{
+  border-top:1px solid var(--line);margin-top:40px;padding:28px 20px 46px;text-align:center;
+  color:#6f6588;font-size:12px;
+}
+footer b{color:var(--gold)}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+
+/* falling 67s */
+.p67{
+  position:fixed;top:-60px;z-index:50;pointer-events:none;font-weight:900;
+  color:rgba(255,200,87,.75);animation:fall linear forwards;will-change:transform;
+}
+@keyframes fall{
+  0%{transform:translateY(0) rotate(0);opacity:0}
+  10%{opacity:1}
+  100%{transform:translateY(115vh) rotate(220deg);opacity:0}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .rv{opacity:1;transform:none}
+}
+</style>
+<header class="hero">
+  <div class="glow"></div>
+  <p class="kicker">sessenta e sete</p>
+  <div class="big" aria-hidden="true">
+    <span class="echo">67</span>
+    <span class="num">67</span>
+  </div>
+  <h1>O primo que <em>não passa despercebido.</em></h1>
+  <p class="lede">Não é o número mais famoso do mundo — mas talvez devesse ser. O 67 é superprimo, é um elemento químico, é um departamento francês, tem salmo, tem rotina de sorte e ainda sobra charme.</p>
+  <div class="chips">
+    <span class="chip"><b>19º</b> primo</span>
+    <span class="chip"><b>superprimo</b></span>
+    <span class="chip"><b>primo de Chen</b></span>
+    <span class="chip"><b>Ho</b> · hólmio</span>
+    <span class="chip"><b>LXVII</b> em romano</span>
+  </div>
+  <div class="scroll">role para descobrir</div>
+</header>
+
+<main>
+  <section class="stats rv">
+    <div class="stat"><div class="k">classificação</div><div class="v">19º <span>primo</span></div><div class="d">e 19 também é primo</div></div>
+    <div class="stat"><div class="k">binário</div><div class="v">1000011<span>₂</span></div><div class="d">três 1s, quatro 0s</div></div>
+    <div class="stat"><div class="k">hexadecimal</div><div class="v">43<span>₁₆</span></div><div class="d">simples assim</div></div>
+    <div class="stat"><div class="k">romano</div><div class="v">LXVII</div><div class="d">sessenta + sete</div></div>
+    <div class="stat"><div class="k">número atômico</div><div class="v">Ho <span>67</span></div><div class="d">hólmio, terra rara</div></div>
+  </section>
+
+  <section id="matematica" class="rv">
+    <p class="eyebrow">01 · matemática</p>
+    <h2>Pequeno, ímpar e cheio de credenciais.</h2>
+    <p class="sub">O 67 só tem dois divisores — 1 e ele mesmo —, mas a lista de títulos que carrega é bem maior.</p>
+    <div class="cards">
+      <article class="card"><span class="bigx">67</span><div class="tag">título 01</div><h3>Superprimo</h3><p>É o <b>19º número primo</b>. E 19 também é primo (o 8º). Um primo que ocupa posição prima ganha o apelido de <b>superprimo</b>.</p></article>
+      <article class="card"><div class="tag">título 02</div><h3>Primo de Chen</h3><p>Some dois: <b>67 + 2 = 69 = 3 × 23</b>. Como o vizinho é semiprimo, o 67 entra no clube dos <b>primos de Chen</b>.</p></article>
+      <article class="card"><div class="tag">título 03</div><h3>Primo sexy</h3><p>Está a seis unidades de <b>61</b> e de <b>73</b>, ambos primos. O nome vem do latim <i>sex</i>, seis. Nada mais.</p></article>
+      <article class="card"><div class="tag">título 04</div><h3>Soma de cinco primos</h3><p><b>7 + 11 + 13 + 17 + 19 = 67</b>. Cinco primos consecutivos, um único resultado.</p></article>
+      <article class="card"><div class="tag">título 05</div><h3>Número da sorte</h3><p>Na peneira dos <b>lucky numbers</b>, o 67 sobrevive até o fim. Literalmente: ele é um número da sorte.</p></article>
+      <article class="card"><div class="tag">título 06</div><h3>Quadrado perfeito de si</h3><p><b>67² = 4.489</b>. E, como não poderia deixar de ser, <b>√4.489 = 67</b>.</p></article>
+    </div>
+  </section>
+
+  <section id="ciencia" class="rv">
+    <p class="eyebrow">02 · ciência</p>
+    <h2>O 67 também existe na tabela periódica.</h2>
+    <p class="sub">Entre o disprósio e o érbio, mora o hólmio — um metal prateado que carrega o número 67 no crachá.</p>
+    <div class="cards">
+      <article class="card"><div class="tag">elemento</div><h3>Hólmio (Ho)</h3><p>Metal de <b>terra rara</b>, maleável e prateado. Tem o <b>maior momento magnético</b> entre todos os elementos naturais — um ímã em potencial.</p></article>
+      <article class="card"><div class="tag">medicina</div><h3>Laser de hólmio</h3><p>Usado em cirurgias e no tratamento de cálculos renais: o comprimento de onda do hólmio corta tecido com precisão e pouca hemorragia.</p></article>
+      <article class="card"><div class="tag">energia</div><h3>Barras de controle</h3><p>Por absorver nêutrons com eficiência, o hólmio já foi usado em barras de controle de reatores nucleares.</p></article>
+    </div>
+  </section>
+
+  <section id="mundo" class="rv">
+    <p class="eyebrow">03 · mundo</p>
+    <h2>Sete lugares onde o 67 aparece.</h2>
+    <p class="sub">De Estrasburgo a um capítulo de salmo, o número vai muito além da matemática.</p>
+    <div class="factsline">
+      <div class="fact"><div class="n">67</div><div><h4>Bas-Rhin, França</h4><p>O departamento 67 tem Estrasburgo como capital. Para os franceses, “le 67” é endereço.</p></div></div>
+      <div class="fact"><div class="n">67</div><div><h4>Salmo 67</h4><p>Um dos capítulos do Livro dos Salmos, conhecido por falar de bênção e colheita.</p></div></div>
+      <div class="fact"><div class="n">67</div><div><h4>Sura 67 — Al-Mulk</h4><p>“O Domínio”, capítulo do Alcorão com 30 versículos sobre a soberania da criação.</p></div></div>
+      <div class="fact"><div class="n">67</div><div><h4>ASCII 67</h4><p>Na tabela ASCII, o código decimal 67 corresponde à letra <b>C</b>. Curto e direto.</p></div></div>
+      <div class="fact"><div class="n">67</div><div><h4>US Route 67</h4><p>Rodovia americana que atravessa Illinois, Iowa e Missouri, às margens do Mississippi.</p></div></div>
+      <div class="fact"><div class="n">67</div><div><h4>1967</h4><p>Ano do primeiro Super Bowl e do Celtic campeão europeu — o time dos “Lisbon Lions”.</p></div></div>
+    </div>
+  </section>
+  <section id="tabela" class="rv">
+    <p class="eyebrow">04 · tabela</p>
+    <h2>O 67 na tabuada, sem preguiça.</h2>
+    <p class="sub">Todos os múltiplos até 12, para consultar antes da prova ou impressionar alguém no elevador.</p>
+    <div class="split">
+      <div class="table67">
+        <div class="thead"><span>multiplicação</span><span>resultado</span></div>
+        <div class="row"><span class="i">1×</span><span class="m">67 × 1</span><span class="r">67</span></div>
+        <div class="row"><span class="i">2×</span><span class="m">67 × 2</span><span class="r">134</span></div>
+        <div class="row"><span class="i">3×</span><span class="m">67 × 3</span><span class="r">201</span></div>
+        <div class="row"><span class="i">4×</span><span class="m">67 × 4</span><span class="r">268</span></div>
+        <div class="row"><span class="i">5×</span><span class="m">67 × 5</span><span class="r">335</span></div>
+        <div class="row"><span class="i">6×</span><span class="m">67 × 6</span><span class="r">402</span></div>
+        <div class="row"><span class="i">7×</span><span class="m">67 × 7</span><span class="r">469</span></div>
+        <div class="row"><span class="i">8×</span><span class="m">67 × 8</span><span class="r">536</span></div>
+        <div class="row"><span class="i">9×</span><span class="m">67 × 9</span><span class="r">603</span></div>
+        <div class="row"><span class="i">10×</span><span class="m">67 × 10</span><span class="r">670</span></div>
+        <div class="row"><span class="i">11×</span><span class="m">67 × 11</span><span class="r">737</span></div>
+        <div class="row"><span class="i">12×</span><span class="m">67 × 12</span><span class="r">804</span></div>
+      </div>
+
+      <div class="calc">
+        <label for="n67">calculadora do 67</label>
+        <div class="line">
+          <span class="x">67 ×</span>
+          <input id="n67" type="number" min="0" max="999999" value="7" inputmode="numeric" aria-label="multiplicador">
+        </div>
+        <div class="eq" id="res67">67 × <span>7</span> = 469</div>
+        <p class="note" id="note67">Bônus: 7 também é primo. Dois primos na mesma conta.</p>
+        <button class="celebrate" id="celebrate">celebrar o 67</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="rv">
+    <p class="eyebrow">05 · em 60 segundos</p>
+    <h2>Curiosidades para levar.</h2>
+    <div class="factsline">
+      <div class="fact"><div class="n">01</div><div><h4>Único da vizinhança</h4><p>Entre 61 e 71, o 67 é o único primo. Um ponto solitário no meio do caminho.</p></div></div>
+      <div class="fact"><div class="n">02</div><div><h4>Não é soma de quadrados</h4><p>Nenhum par de quadrados perfeitos soma 67. Ele não se divide em a² + b².</p></div></div>
+      <div class="fact"><div class="n">03</div><div><h4>Dígitos que somam 13</h4><p>6 + 7 = 13. Por isso o 67 não é divisível por 3 — e continua teimoso como bom primo.</p></div></div>
+      <div class="fact"><div class="n">04</div><div><h4>Camisa rara</h4><p>No futebol, o 67 quase nunca aparece. Se aparecer, é porque alguém quis marcar território.</p></div></div>
+      <div class="fact"><div class="n">05</div><div><h4>Quase dois terços</h4><p>67% fica a um fio de 66,6…%. O número adora flertar com a maioria.</p></div></div>
+      <div class="fact"><div class="n">06</div><div><h4>Três letras em binário</h4><p>1000011₂ tem exatamente três bits ligados. O 67 é econômico até na eletrônica.</p></div></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>Feito à mão, em homenagem ao <b>67</b>.<br>
+  Primo, superprimo, atômico e — acima de tudo — sessenta e sete.</p>
+</footer>
+<script>
+(function(){
+  'use strict';
+
+  /* reveal on scroll */
+  const targets = document.querySelectorAll('.rv');
+  if ('IntersectionObserver' in window){
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(en => {
+        if (en.isIntersecting){
+          en.target.classList.add('in');
+          io.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    targets.forEach(t => io.observe(t));
+  } else {
+    targets.forEach(t => t.classList.add('in'));
+  }
+
+  /* primos */
+  function isPrime(n){
+    if (!Number.isFinite(n) || n < 2) return false;
+    if (n % 2 === 0) return n === 2;
+    if (n % 3 === 0) return n === 3;
+    for (let i = 5; i * i <= n; i += 6){
+      if (n % i === 0 || n % (i + 2) === 0) return false;
+    }
+    return true;
+  }
+
+  /* calculator */
+  const input = document.getElementById('n67');
+  const result = document.getElementById('res67');
+  const note = document.getElementById('note67');
+
+  function fmt(n){ return n.toLocaleString('pt-BR'); }
+
+  function update(){
+    let n = parseInt(String(input.value).replace(/[^\d]/g, ''), 10);
+    if (!Number.isFinite(n)) n = 0;
+    n = Math.min(999999, Math.max(0, n));
+    const r = n * 67;
+    result.innerHTML = `67 × <span>${fmt(n)}</span> = ${fmt(r)}`;
+    if (n === 1){
+      note.textContent = 'Um vezes 67: o 67 sozinho, do jeito que ele gosta.';
+    } else if (n === 0){
+      note.textContent = 'Zero também entra na festa. Até o nada multiplica por 67.';
+    } else if (isPrime(n)){
+      note.textContent = `Bônus: ${n} também é primo. Dois primos na mesma conta.`;
+    } else {
+      note.textContent = 'Tente um primo: 2, 3, 5, 7, 11, 13… o resultado fica com outra energia.';
+    }
+  }
+
+  input.addEventListener('input', update);
+  input.addEventListener('change', update);
+  update();
+
+  /* celebrate */
+  const btn = document.getElementById('celebrate');
+  btn.addEventListener('click', () => {
+    for (let i = 0; i < 42; i++){
+      const s = document.createElement('span');
+      s.className = 'p67';
+      s.textContent = '67';
+      s.style.left = (Math.random() * 100) + 'vw';
+      s.style.fontSize = (14 + Math.random() * 56) + 'px';
+      s.style.animationDuration = (1.6 + Math.random() * 1.9) + 's';
+      s.style.animationDelay = (Math.random() * 0.45) + 's';
+      s.style.color = Math.random() < 0.3 ? 'rgba(139,92,246,.8)' : 'rgba(255,200,87,.8)';
+      document.body.appendChild(s);
+      setTimeout(() => s.remove(), 4300);
+    }
+  });
+})();
+</script>
+</body>
+</html>
